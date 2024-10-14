@@ -96,8 +96,6 @@ We welcome contributions to LMSA! If you'd like to contribute, please follow the
 4. Push your changes to your fork.
 5. Submit a pull request to the main repository.
 
-Please read our [Contributing Guidelines](CONTRIBUTING.md) for more details.
-
 ## Disclaimer
 
 LMSA is a third-party application and is not affiliated with LM Studio or its developers. This app is independently developed to provide an Android front-end interface for interacting with LM Studio. Use of this app is at your own discretion, and the developers of LMSA are not responsible for any issues arising from its use.
