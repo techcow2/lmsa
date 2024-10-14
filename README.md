@@ -4,10 +4,12 @@
 
 - [Overview](#overview)
 - [Features](#features)
+- [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Configuration](#configuration)
 - [Contributing](#contributing)
+- [Disclaimer](#disclaimer)
 - [License](#license)
 
 <div style="display: flex; justify-content: space-between; gap: 10px;">
