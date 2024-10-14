@@ -10,7 +10,6 @@
 - [Contributing](#contributing)
 - [License](#license)
 
-
 <div style="display: flex; justify-content: space-between; gap: 10px;">
     <img src="https://github.com/user-attachments/assets/b3640a20-a180-4a37-94ae-53c6020ca03b" alt="Google Pixel 4 XL Screenshot 0" style="width: 22%; height: auto;">
     <img src="https://github.com/user-attachments/assets/dd665c56-4639-440d-8826-eb0813117304" alt="Google Pixel 4 XL Screenshot 2" style="width: 22%; height: auto;">
@@ -43,6 +42,15 @@ LMSA (LM Studio Assistant) is an open-source Android front-end application for L
 
 - **Open Source**: Transparent codebase, open for community contributions and audits.
 - **LM Studio Integration**: Seamless connection with LM Studio's powerful language model capabilities.
+
+## Requirements
+
+Before using LMSA, ensure that the following requirements are met:
+
+- **Android Device**: You must have a device running Android 7.0 (Nougat) or higher.
+- **LM Studio**: LM Studio must be installed and running on a network-accessible computer.
+- **Network Configuration**:
+  - CORS (Cross-Origin Resource Sharing) must be enabled in LM Studio settings to allow cross-origin requests from LMSA.
 
 ## Installation
 
