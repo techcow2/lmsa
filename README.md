@@ -98,6 +98,10 @@ We welcome contributions to LMSA! If you'd like to contribute, please follow the
 
 Please read our [Contributing Guidelines](CONTRIBUTING.md) for more details.
 
+## Disclaimer
+
+LMSA is a third-party application and is not affiliated with LM Studio or its developers. This app is independently developed to provide an Android front-end interface for interacting with LM Studio. Use of this app is at your own discretion, and the developers of LMSA are not responsible for any issues arising from its use.
+
 ## License
 
 LMSA is released under the [MIT License](LICENSE.md). Feel free to use, modify, and distribute the code as per the license terms.
