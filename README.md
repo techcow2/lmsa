@@ -52,7 +52,7 @@ LMSA (LM Studio Assistant) is an open-source Android front-end application for L
 1. Open the project in Android Studio.
 2. Build and run the app on your Android device or emulator.
 
-Alternatively, download the latest APK from the [Releases](https://github.com/yourusername/lmsa/releases) page.
+Alternatively, download the latest APK from the [Releases](https://github.com/techcow2/lmsa/releases) page.
 
 ## Usage
 
