@@ -2,7 +2,8 @@ const chatContainer = document.getElementById('chat-container');
 const messagesContainer = document.getElementById('messages');
 const chatForm = document.getElementById('chat-form');
 const userInput = document.getElementById('user-input');
-const serverUrlInput = document.getElementById('server-url');
+const serverIpInput = document.getElementById('server-ip');
+const serverPortInput = document.getElementById('server-port');
 const systemPromptInput = document.getElementById('system-prompt');
 const clearChatButton = document.getElementById('clear-chat');
 const loadingIndicator = document.getElementById('loading-indicator');
@@ -35,7 +36,36 @@ const regenerateTextButton = document.getElementById('regenerate-text');
 // New variables for exit functionality
 const exitButton = document.getElementById('exit-btn');
 
-let API_URL = serverUrlInput ? serverUrlInput.value + '/v1/chat/completions' : '';
+let API_URL = '';
+
+// Load saved server settings
+const savedIp = localStorage.getItem('serverIp');
+const savedPort = localStorage.getItem('serverPort');
+
+if (serverIpInput && serverPortInput) {
+    if (savedIp) serverIpInput.value = savedIp;
+    if (savedPort) serverPortInput.value = savedPort;
+    
+    if (savedIp && savedPort) {
+        API_URL = `http://${savedIp}:${savedPort}/v1/chat/completions`;
+    }
+
+    // Add event listeners for IP and port inputs
+    serverIpInput.addEventListener('change', updateServerUrl);
+    serverPortInput.addEventListener('change', updateServerUrl);
+}
+
+function updateServerUrl() {
+    const ip = serverIpInput.value.trim();
+    const port = serverPortInput.value.trim();
+    
+    if (ip && port) {
+        API_URL = `http://${ip}:${port}/v1/chat/completions`;
+        localStorage.setItem('serverIp', ip);
+        localStorage.setItem('serverPort', port);
+        fetchAvailableModels();
+    }
+}
 let currentChatId = Date.now();
 let chatHistoryData = {};
 let systemPrompt = '';
@@ -65,13 +95,7 @@ if (messagesContainer) {
     }, { passive: true });
 }
 
-if (serverUrlInput) {
-    serverUrlInput.addEventListener('change', () => {
-        API_URL = serverUrlInput.value + '/v1/chat/completions';
-        localStorage.setItem('serverUrl', serverUrlInput.value);
-        fetchAvailableModels();
-    });
-}
+
 
 if (systemPromptInput) {
     systemPromptInput.addEventListener('change', () => {
@@ -137,7 +161,8 @@ function updateLoadedModelDisplay(modelName) {
 
 async function fetchAvailableModels() {
     try {
-        const response = await fetch(`${serverUrlInput.value}/v1/models`);
+        if (!serverIpInput || !serverPortInput) return;
+        const response = await fetch(`http://${serverIpInput.value}:${serverPortInput.value}/v1/models`);
         if (!response.ok) {
             throw new Error('Failed to fetch models');
         }
@@ -283,7 +308,8 @@ if (stopButton) {
 
 async function isServerRunning() {
     try {
-        const response = await fetch(`${serverUrlInput.value}/v1/models`, {
+        if (!serverIpInput || !serverPortInput) return false;
+        const response = await fetch(`http://${serverIpInput.value}:${serverPortInput.value}/v1/models`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -317,7 +343,8 @@ if (newChatButton) {
         messagesContainer.innerHTML = '';
         showWelcomeMessage();
         userInput.focus();
-        if (window.innerWidth <= 768) {
+        // Always close sidebar on mobile when creating new chat
+        if (sidebar.classList.contains('active') || !sidebar.classList.contains('hidden')) {
             toggleSidebar();
         }
         settingsModal.classList.add('hidden');
@@ -387,14 +414,52 @@ function appendMessage(sender, message) {
 }
 
 function sanitizeInput(input) {
+    // First escape HTML to prevent XSS
     const div = document.createElement('div');
     div.textContent = input;
     let sanitized = div.innerHTML;
     
-    // Replace code blocks with pre and code tags
+    // Handle thinking sections
+    sanitized = sanitized.replace(/Let's approach this step by step:\n/g, '<div class="think"><div class="reasoning-intro">Let\'s approach this step by step:</div>');
+    sanitized = sanitized.replace(/^(\d+\)\s*.*?)(?=\n\d+\)|$)/gm, '<div class="reasoning-step">$1</div>');
+    
+    // Handle code blocks with language specification
     sanitized = sanitized.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, language, code) => {
         return `<pre><code class="language-${language || 'plaintext'}">${code.trim()}</code></pre>`;
     });
+    
+    // Handle inline code
+    sanitized = sanitized.replace(/`([^`]+)`/g, '<code>$1</code>');
+    
+    // Handle headers
+    sanitized = sanitized.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+    sanitized = sanitized.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+    sanitized = sanitized.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+    
+    // Handle lists
+    sanitized = sanitized.replace(/^\* (.+)$/gm, '<li>$1</li>');
+    sanitized = sanitized.replace(/^- (.+)$/gm, '<li>$1</li>');
+    sanitized = sanitized.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
+    
+    // Wrap lists in appropriate containers
+    sanitized = sanitized.replace(/(<li>.*?<\/li>\n*)+/g, '<ul>$&</ul>');
+    
+    // Handle emphasis and strong
+    sanitized = sanitized.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    sanitized = sanitized.replace(/\*(.+?)\*/g, '<em>$1</em>');
+    sanitized = sanitized.replace(/_(.+?)_/g, '<em>$1</em>');
+    
+    // Handle links
+    sanitized = sanitized.replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" class="text-blue-400 hover:text-blue-300">$1</a>');
+    
+    // Handle paragraphs
+    sanitized = sanitized.replace(/\n\n/g, '</p><p>');
+    sanitized = '<p>' + sanitized + '</p>';
+    
+    // Close thinking section div if it was opened
+    if (sanitized.includes('think')) {
+        sanitized += '</div>';
+    }
     
     return sanitized;
 }
@@ -564,12 +629,22 @@ function lazyLoadMessages(messages, startIndex, chunkSize = 10) {
 
 // Close sidebar when clicking outside on mobile
 document.addEventListener('click', (e) => {
-    if (window.innerWidth <= 768 && sidebar && sidebar.classList.contains('active') && 
-        !sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+    if (window.innerWidth <= 768 && 
+        sidebar && 
+        !sidebar.classList.contains('hidden') && 
+        !e.target.closest('#sidebar') && 
+        !e.target.closest('#sidebar-toggle')) {
         toggleSidebar();
     }
 });
-
+document.getElementById('about-btn').addEventListener('click', () => {
+    document.getElementById('about-modal').classList.remove('hidden');
+    // Close the sidebar when About button is clicked
+    const sidebar = document.getElementById('sidebar');
+    if (window.innerWidth < 768) { // Only close on mobile view
+        sidebar.classList.add('hidden');
+    }
+});
 // Handle window resize
 window.addEventListener('resize', () => {
     if (window.innerWidth > 768) {
@@ -842,6 +917,28 @@ function closeApplication() {
 
 // Initialize the UI
 document.addEventListener('DOMContentLoaded', () => {
+    // About modal functionality
+    const aboutBtn = document.getElementById('about-btn');
+    const aboutModal = document.getElementById('about-modal');
+    const closeAbout = document.getElementById('close-about');
+
+    if (aboutBtn && aboutModal && closeAbout) {
+        aboutBtn.addEventListener('click', () => {
+            aboutModal.classList.remove('hidden');
+        });
+
+        closeAbout.addEventListener('click', () => {
+            aboutModal.classList.add('hidden');
+        });
+
+        // Close modal when clicking outside
+        aboutModal.addEventListener('click', (e) => {
+            if (e.target === aboutModal) {
+                aboutModal.classList.add('hidden');
+            }
+        });
+    }
+
     loadChatHistory();
     loadServerUrl();
     loadSystemPrompt();

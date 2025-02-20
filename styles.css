@@ -64,6 +64,54 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 0 10px rgba(44, 62, 80, 0.3);
 }
 
+/* Reasoning styles for think sections */
+.think {
+    background-color: #1a2433;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    border: 2px solid #2a3f5f;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    color: #a0a0a0;
+    font-style: italic;
+    line-height: 1.8;
+}
+
+.reasoning-intro {
+    color: #7cb7ff;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    font-size: 1.1em;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #2a3f5f;
+    padding-bottom: 0.75rem;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.reasoning-step {
+    margin: 1rem 0;
+    padding: 1rem 1.25rem;
+    border-left: 3px solid #7cb7ff;
+    background-color: #1e2937;
+    border-radius: 0 8px 8px 0;
+    transition: all 0.3s ease;
+    position: relative;
+    font-size: 1em;
+    line-height: 1.6;
+    color: #d1d5db;
+}
+
+.reasoning-step:hover {
+    background-color: #243447;
+    transform: translateX(4px);
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
 #welcome-message {
     display: flex;
     align-items: center;
@@ -227,6 +275,7 @@ h1 {
     text-transform: uppercase;
     letter-spacing: 2px;
     background: linear-gradient(90deg, #3498db, #2ecc71);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -294,6 +343,84 @@ h1 {
 #context-menu button:last-child {
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
+}
+
+/* Empty message modal styles */
+#empty-message-modal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#empty-message-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+#empty-message-modal .modal-content {
+    background-color: #2c3e50;
+    border: 1px solid #34495e;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 90%;
+    width: 320px;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+#empty-message-modal.active .modal-content {
+    transform: scale(1);
+}
+
+#empty-message-modal .modal-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    color: #e74c3c;
+}
+
+#empty-message-modal .modal-header i {
+    margin-right: 0.5rem;
+    font-size: 1.25rem;
+}
+
+#empty-message-modal .modal-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #e0e0e0;
+}
+
+#empty-message-modal .modal-body {
+    color: #bdc3c7;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+#empty-message-modal .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#empty-message-modal .close-modal {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#empty-message-modal .close-modal:hover {
+    background-color: #2980b9;
 }
 
 /* Style for long-press highlight */
