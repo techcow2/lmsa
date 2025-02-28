@@ -1,8 +1,9 @@
-# LMSA - LM Studio Android Front-End  
+# LMSA - LM Studio Android Front-End
 
-## Table of Contents  
+## Table of Contents
 
 - [Overview](#overview)  
+- [Quick Tutorial Video](#quick-tutorial-video)  
 - [Updates](#updates)  
 - [Features](#features)  
 - [Requirements](#requirements)  
@@ -20,13 +21,18 @@
     <img src="https://github.com/user-attachments/assets/85e275f3-62fa-4143-9fa2-1cade83031c5" alt="Google Pixel 4 XL Screenshot 1" style="width: 22%; height: auto;">  
 </div>  
 
-## Overview  
+## Overview
 
-LMSA (LM Studio Assistant) is an open-source Android front-end application for LM Studio. It provides a clean, user-friendly interface to interact with language models on your Android device. LMSA is designed with privacy in mind, offering a tracking-free and ad-free experience for users who want to leverage the power of large language models on their mobile devices.  
+LMSA (LM Studio Assistant) is an open-source Android front-end application for LM Studio. It provides a clean, user-friendly interface to interact with language models on your Android device. LMSA is designed with privacy in mind, offering a tracking-free and ad-free experience for users who want to leverage the power of large language models on their mobile devices.
 
-## Updates  
+## Quick Tutorial Video
 
-### 🚀 Latest Features & Improvements  
+For a step-by-step guide on how to set up and use LMSA with LM Studio, check out this quick tutorial on YouTube:  
+[![Watch the video](https://img.youtube.com/vi/qoXfa6In5BM/0.jpg)](https://youtu.be/qoXfa6In5BM)
+
+## Updates
+
+### 🚀 Latest Features & Improvements
 
 - **Enhanced Server Settings Input**: IP and port fields are now separated for easier configuration.  
 - **Help Menu Added**: Quickly access guidance and support directly within the app.  
@@ -35,51 +41,51 @@ LMSA (LM Studio Assistant) is an open-source Android front-end application for L
 - **Improved Slide Menu**: Smoother navigation and enhanced usability.  
 - **New About Menu**: Get detailed app information conveniently in one place.  
 
-Stay tuned for more updates and improvements!  
+Stay tuned for more updates and improvements!
 
-## Features  
+## Features
 
-### 🔒 Privacy-Focused  
+### 🔒 Privacy-Focused
 
 - **No Tracking**: Your data and interactions remain private.  
 - **Ad-Free**: Enjoy a clean, distraction-free experience.  
 
-### 💬 Customizable Interactions  
+### 💬 Customizable Interactions
 
 - **System Prompt**: Set and modify the system prompt to guide your AI interactions.  
 - **Adjustable Temperature**: Fine-tune the LLM's creativity directly from your device.  
 
-### 📱 User-Friendly Interface  
+### 📱 User-Friendly Interface
 
 - **Clean Design**: Intuitive and minimalistic UI for effortless navigation.  
 - **Model Display**: Easily view the currently loaded language model on your device.  
 
-### 🛠 Technical Highlights  
+### 🛠 Technical Highlights
 
 - **Open Source**: Transparent codebase, open for community contributions and audits.  
 - **LM Studio Integration**: Seamless connection with LM Studio's powerful language model capabilities.  
 
-## Requirements  
+## Requirements
 
-Before using LMSA, ensure that the following requirements are met:  
+Before using LMSA, ensure that the following requirements are met:
 
 - **Android Device**: You must have a device running Android 7.0 (Nougat) or higher.  
 - **LM Studio**: LM Studio must be installed and running on a network-accessible computer.  
 - **Network Configuration**:  
-  - CORS (Cross-Origin Resource Sharing) must be enabled in LM Studio settings to allow cross-origin requests from LMSA.  
+  - CORS (Cross-Origin Resource Sharing) must be enabled in LM Studio settings to allow cross-origin requests from LMSA.
 
-## Installation  
+## Installation
 
 1. Clone the repository:  
-   ```bash  
-   git clone https://github.com/techcow2/lmsa.git  
-   ```  
+   ```bash
+   git clone https://github.com/techcow2/lmsa.git
+   ```
 2. Open the project in Android Studio.  
-3. Build and run the app on your Android device or emulator.  
+3. Build and run the app on your Android device or emulator.
 
-Alternatively, download the latest APK from the [Releases](https://github.com/techcow2/lmsa/releases) page.  
+Alternatively, download the latest APK from the [Releases](https://github.com/techcow2/lmsa/releases) page.
 
-## Usage  
+## Usage
 
 1. **Run LM Studio**: Start LM Studio on your computer.  
 2. **Enable Server**: Run the server within LM Studio.  
@@ -92,39 +98,39 @@ Alternatively, download the latest APK from the [Releases](https://github.com/te
    - Navigate to the Settings menu in LMSA.  
    - Enter the copied IP address in the designated field.  
    - Tap 'Close' to save the settings.  
-7. **Interact with the Model**: Start interacting with the AI model through LMSA's clean interface.  
+7. **Interact with the Model**: Start interacting with the AI model through LMSA's clean interface.
 
-## Configuration  
+## Configuration
 
-### Setting the System Prompt  
+### Setting the System Prompt
 
 1. Navigate to the Settings menu.  
 2. Find the "System Prompt" section.  
-3. Enter your desired system prompt to guide the AI's behavior.  
+3. Enter your desired system prompt to guide the AI's behavior.
 
-### Adjusting LLM Temperature  
+### Adjusting LLM Temperature
 
 1. During a conversation, locate the temperature slider.  
-2. Adjust the slider to increase (more creative) or decrease (more focused) the temperature.  
+2. Adjust the slider to increase (more creative) or decrease (more focused) the temperature.
 
-### Viewing Loaded Model  
+### Viewing Loaded Model
 
-The currently loaded model will be displayed at the top of the main interface.  
+The currently loaded model will be displayed at the top of the main interface.
 
-## Contributing  
+## Contributing
 
-We welcome contributions to LMSA! If you'd like to contribute, please follow these steps:  
+We welcome contributions to LMSA! If you'd like to contribute, please follow these steps:
 
 1. Fork the repository.  
 2. Create a new branch for your feature or bug fix.  
 3. Make your changes and commit them with clear, descriptive messages.  
 4. Push your changes to your fork.  
-5. Submit a pull request to the main repository.  
+5. Submit a pull request to the main repository.
 
-## Disclaimer  
+## Disclaimer
 
-LMSA is a third-party application and is not affiliated with LM Studio or its developers. This app is independently developed to provide an Android front-end interface for interacting with LM Studio. Use of this app is at your own discretion, and the developers of LMSA are not responsible for any issues arising from its use.  
+LMSA is a third-party application and is not affiliated with LM Studio or its developers. This app is independently developed to provide an Android front-end interface for interacting with LM Studio. Use of this app is at your own discretion, and the developers of LMSA are not responsible for any issues arising from its use.
 
-## License  
+## License
 
-LMSA is released under the [MIT License](LICENSE.md). Feel free to use, modify, and distribute the code as per the license terms. 
+LMSA is released under the [MIT License](LICENSE.md). Feel free to use, modify, and distribute the code as per the license terms.
